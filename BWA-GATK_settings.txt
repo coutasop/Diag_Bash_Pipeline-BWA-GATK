@@ -1,0 +1,61 @@
+##SETTINGS FOR THE NGS PIPELINE
+
+###### IF CASAVA STRUCTURE (COMMENT THIS CATEGORY OTHERWISE)
+######### RUN FOLDER DIRECTORY and Type of Analysis (Exome or Diag): 
+export sequencer="MiSeq"									#"MiSeq" ou "GAIIx"
+export seqcenter="IRIB-$sequencer"
+export runFolder="/storage/crihan-msa/RunsPlateforme/$sequencer/140423_M02807_0001_000000000-A8TVT"
+export analysisType="Diag"									# "Diag" ou "Exome"
+export project="RunDiag10"									#=Nom du projet -> doit être identique à celui de CASAVA
+
+###### DATA DIRECTORIES: 
+export outdir="$runFolder/BWA-GATK_$project"
+export fastqdir="$outdir/FASTQ"
+export samdir="$outdir/SAM"
+export bamdir="$outdir/BAM"
+export vcfdir="$outdir/VCF"
+export scriptdir="$outdir/SCRIPT"
+export anndir="$outdir/ANN"
+export extractdir="$outdir/ANN-EXTRACT"
+export depthdir="$outdir/DEPTH"
+export joinDir="$runFolder/Result$project"		#Doit être le même entre les settings CASAVA et GATK
+export annExtractDir="$joinDir/Ann-extract"		#Doit être le même entre les settings CASAVA et GATK
+export reportDir="$joinDir/Rapport"			#Doit être le même entre les settings CASAVA et GATK
+
+###### ANALYSIS TO LAUNCH: 				# "y" or "n" pour controler le lancement de l'étape
+export doALN="n"					#Alignement									
+export doPIC="n" 					#Picard		
+export doREALN="n"					#GATK REALIGN
+export doVC="n"						#Variant Calling									
+export doJOINGT="n"					#Join Genotyping
+export doANN="n"					#Annotation + extract
+export doQUAL="n"					#Quality (rapports profondeur)
+
+####------------------------Changer si capture différente----------------------------###
+## MAIN REFERENCE FILES
+export refdir="/storage/crihan-msa/RunsPlateforme/Reference" #Change dependant of machine
+export myref="Homo_sapiens/hg19/human_g1k_v37.fasta"
+export hapmap="hapmap_3.3.b37.vcf"
+export omni="1000G_omni2.5.b37.vcf"
+export dbsnp="dbsnp_137.b37.vcf"
+export dbsnp138="dbsnp_138.vcf"
+export kG="1000G_phase1.snps.high_confidence.b37.vcf"
+export kGindels="1000G_phase1.indels.b37.vcf"
+export mills="Mills_and_1000G_gold_standard.indels.b37.vcf"
+export targets="Capture/MMR/036540_D_BED_20110915-DiagK_colique-U614_TARGET.bed"
+export targetsDiag="Capture/MMR/DiagCapture-11genes_20131009.bed"
+export targetsDiagExtract="Capture/MMR/DiagCapture-11genes_20131009_extract.bed"
+export gList="Capture/MMR/geneList.txt"						#Utile uniquement si Diag
+export nmList="Capture/MMR/nmList.txt"						#Utile uniquement si Diag
+
+####------------------------Changer si serveur différent----------------------------###	
+## MAIN DIRECTORIES PATH
+###### PIPELINE SOFTWARE: DEPENDENT OF MACHINE 
+export maxthreads=8
+export bwadir="/opt/BWA"
+export picarddir="/opt/PICARD"
+export gatkdir="/opt/GATK"
+export pipedir="/opt/pipeline_NGS/Pipeline-BWA-GATK"
+export PERL5LIB=/opt/vcftools_0.1.11/perl
+export alamutHTdir="/opt/alamutHT"
+export Annovardir="/opt/Annovar"
